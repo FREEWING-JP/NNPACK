@@ -872,6 +872,9 @@ static enum nnp_status compute_gemm_convolution_inference(
 				}
 			}
 			/* Add bias */
+			// digitalbrain79/NNPACK-darknet
+			// @thomas-udp thomas-udp Add bias when bias is not NULL
+			if (bias) {
 			NNP_OUTPUT_TRANSFORM_START(profile)
 			switch (activation) {
 				case nnp_activation_identity:
@@ -895,6 +898,7 @@ static enum nnp_status compute_gemm_convolution_inference(
 					NNP_UNREACHABLE;
 			}
 			NNP_OUTPUT_TRANSFORM_END(profile)
+			}
 			break;
 		}
 		case nnp_convolution_transform_strategy_precompute:
